@@ -1,5 +1,5 @@
 export class Settings {
   constructor(
-    public baseUrl: string
+    public basePath: string
   ){}
 }

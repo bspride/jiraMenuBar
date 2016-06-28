@@ -9,7 +9,7 @@ const ipcRenderer = electron.ipcRenderer
   templateUrl: '../templates/settings.template.html'
 })
 export class SettingsComponent {
-  settings: Settings
+  settings = new Settings("truapps/jira")
 
   ngOnInit() {
     this.getSettings()
