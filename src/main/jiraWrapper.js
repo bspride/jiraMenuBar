@@ -5,7 +5,7 @@
 
 const JiraApi = require('jira').JiraApi
 
-export class Jira {
+class Jira {
   constructor (opts) {
     this.connect(opts)
   }
@@ -15,6 +15,8 @@ export class Jira {
   }
 
   getIssues () {
-    this.jira.Issues()
+    return this.jira.Issues()
   }
 }
+
+module.exports = Jira

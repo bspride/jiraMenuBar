@@ -10,7 +10,7 @@ export class SettingsComponent {
   basePath: string;
   setJiraPath (path: string) {
     if(path && path.length > 0) {
-      this.jiraPath = path;
+      this.basePath = path;
     }
   }
 }
