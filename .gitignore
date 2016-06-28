@@ -1,2 +1,12 @@
 #Dependency directories
 node_modules
+typings
+
+#Build directory
+build
+
+#Mac files
+.DS_Store
+
+#VS Code
+.vscode

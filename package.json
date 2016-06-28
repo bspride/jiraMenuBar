@@ -6,7 +6,8 @@
   "scripts": {
     "start": "electron .",
     "test": "standard",
-    "build": "npm test && webpack"
+    "build": "npm test && webpack",
+    "typings": "typings"
   },
   "repository": {
     "type": "git",
@@ -15,20 +16,47 @@
   "author": "Castillo and Clarke",
   "license": "MIT",
   "devDependencies": {
+    "angular2-template-loader": "^0.4.0",
+    "babel-core": "^6.10.4",
     "babel-eslint": "^6.1.0",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-angular2-annotations": "^5.1.0",
+    "babel-plugin-transform-class-properties": "^6.10.2",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-flow-strip-types": "^6.8.0",
+    "babel-preset-es2015": "^6.9.0",
+    "devtron": "^1.2.1",
+    "electron-debug": "^1.0.1",
+    "html-loader": "^0.4.3",
+    "path": "^0.12.7",
     "standard": "^7.1.2",
+    "ts-loader": "^0.8.2",
+    "typescript": "^1.8.10",
+    "typings": "^1.3.0",
     "webpack": "^1.13.1"
   },
   "dependencies": {
-    "angular2": "^2.0.0-beta.17",
+    "@angular/common": "^2.0.0-rc.3",
+    "@angular/compiler": "^2.0.0-rc.3",
+    "@angular/core": "^2.0.0-rc.3",
+    "@angular/forms": "^0.1.1",
+    "@angular/http": "^2.0.0-rc.3",
+    "@angular/platform-browser": "^2.0.0-rc.3",
+    "@angular/platform-browser-dynamic": "^2.0.0-rc.3",
+    "@angular/router": "^3.0.0-alpha.8",
+    "@angular/router-deprecated": "^2.0.0-rc.2",
+    "@angular/upgrade": "^2.0.0-rc.3",
     "es6-shim": "^0.35.1",
     "menubar": "^4.1.2",
     "normalize.css": "^4.1.1",
-    "reflect-metadata": "^0.1.2",
+    "reflect-metadata": "^0.1.3",
     "rxjs": "^5.0.0-beta.6",
     "zone.js": "^0.6.12"
   },
   "standard": {
+    "ignore": [
+      "webpack.config.js"
+    ],
     "parser": "babel-eslint"
   }
 }
