@@ -1,0 +1,14 @@
+{
+  "name": "jiramenubar",
+  "version": "1.0.0",
+  "description": "Menu bar application that will show JIRA notifications",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Castillo and Clarke",
+  "license": "MIT",
+  "devDependencies": {
+    "standard": "^7.1.2"
+  }
+}
