@@ -11,11 +11,13 @@ class Jira {
   }
 
   connect (opts) {
-    this.jira = new JiraApi('https', opts.host, opts.port, opts.user, opts.password)
+    this.jira = new JiraApi('http', opts.host, 80, opts.user, opts.password)
   }
 
-  getIssues () {
-    return this.jira.Issues()
+  getIssuesForCurrentUser (callback) {
+    let jql = {query: 'status="In Progress" AND assignee = curentuser()'}
+
+    this.jira.searchJira(jql, null, callback)
   }
 }
 

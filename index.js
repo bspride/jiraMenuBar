@@ -7,7 +7,7 @@ let jira
 
 require('electron-debug')({showDevTools: true})
 
-mb.on('ready', function ready () {
+mb.on('ready', () => {
   console.log('app is ready')
   // your app code here
 })
@@ -19,7 +19,13 @@ ipcMain.on('jira-connect', (event, args) => {
 
     // Return some success message for now
     if (jira) {
-      event.sender.send('jira-connect-reply', 'success')
+      jira.getIssuesForCurrentUser((err, data) => {
+        if (err) {
+          event.sender.send('jira-connect-reply', err)
+        } else {
+          event.sender.send('jira-connect-reply', data)
+        }
+      })
     } else {
       event.sender.send('jira-connect-reply', 'Something went wrong, failed connection.')
     }
