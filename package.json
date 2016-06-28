@@ -4,6 +4,7 @@
   "description": "Menu bar application that will show JIRA notifications",
   "main": "index.js",
   "scripts": {
+    "start": "electron .",
     "test": "standard"
   },
   "repository": {
