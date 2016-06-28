@@ -7,5 +7,10 @@ import { ROUTER_DIRECTIVES } from "@angular/router"
   directives: ROUTER_DIRECTIVES
 })
 export class SettingsComponent {
-
+  jiraPath: string;
+  setJiraPath (path: string) {
+    if(path && path.length > 0) {
+      this.jiraPath = path;
+    }
+  }
 }
