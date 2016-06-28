@@ -1,16 +1,12 @@
-import { Component } from "@angular/core"
-import { ROUTER_DIRECTIVES } from "@angular/router"
+import { Component, Input } from "@angular/core"
+import { NgForm } from "@angular/common"
+const electron = require('electron')
+const ipcRenderer = electron.ipcRenderer
 
 @Component({
   selector: 'settings',
-  templateUrl: '../templates/settings.template.html',
-  directives: ROUTER_DIRECTIVES
+  templateUrl: '../templates/settings.template.html'
 })
 export class SettingsComponent {
-  basePath: string;
-  setJiraPath (path: string) {
-    if(path && path.length > 0) {
-      this.basePath = path;
-    }
-  }
+
 }
