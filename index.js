@@ -1,5 +1,5 @@
 var menubar = require('menubar')
-require('electron-debug')({showDevTools: true})
+require('electron-debug')
 
 var mb = menubar()
 
