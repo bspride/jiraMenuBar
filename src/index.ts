@@ -4,7 +4,7 @@ import { bootstrap } from '@angular/platform-browser-dynamic'
 
 @Component({
   selector: 'app-root',
-  template: '<h1>My First Menu Bar</h1>'
+  templateUrl: './templates/app.template.html'
 })
 class JiraApp {
 
