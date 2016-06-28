@@ -3,7 +3,11 @@
   <form>
     <div class="form-group">
       <label for="basePath">Base Path</label>
-      <input type="text" class="form-control" [(ngModel)]="settings.basePath" name="basePath" required/>
+      <input type="text" class="form-control" [(ngModel)]="settings.basePath" name="basePath" required />
+    </div>
+    <div class="form-group">
+      <label for="userName">User Name</label>
+      <input type="text" class="form-control" [(ngModel)]="settings.userName" name="userName" required />
     </div>
     <button type="button" class="btn btn-default" (click)="saveSettings()">Connect</button>
   </form>

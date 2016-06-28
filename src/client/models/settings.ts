@@ -1,5 +1,6 @@
 export class Settings {
   constructor(
-    public basePath: string
+    public basePath: string,
+    public userName: string
   ){}
 }
