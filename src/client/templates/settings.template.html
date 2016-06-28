@@ -2,9 +2,9 @@
   <h1>Settings</h1>
   <form>
     <div class="form-group">
-      <label for="base-path">Base Path</label>
-      <input type="text" class="form-control" required/>
+      <label for="basePath">Base Path</label>
+      <input type="text" class="form-control" [(ngModel)]="settings.basePath" name="basePath" required/>
     </div>
-    <button type="submit" class="btn btn-default">Connect</button>
+    <button type="button" class="btn btn-default" (click)="saveSettings()">Connect</button>
   </form>
 </div>
