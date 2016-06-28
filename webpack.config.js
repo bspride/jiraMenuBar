@@ -1,7 +1,7 @@
 const path = require('path')
 
 const PATHS = {
-  src: path.join( __dirname, 'src/index.ts'),
+  src: path.join( __dirname, 'src/client/index.ts'),
   build: path.join( __dirname, 'build')
 }
 
