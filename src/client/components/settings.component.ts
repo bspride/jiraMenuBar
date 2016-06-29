@@ -22,10 +22,10 @@ export class SettingsComponent {
 
   saveSettings() {
     //call to main to persist settings to disk
-    return ipcRenderer.sendSync('jira-connect', {
+    console.log(ipcRenderer.sendSync('jira-connect', {
       host: this.settings.basePath,
-      user: '', // Add in user for testing
-      password: this.settings.userName
-    })
+      user: this.settings.userName,
+      password: this.settings.password
+    }))
   }
 }
