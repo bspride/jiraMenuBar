@@ -1,6 +1,6 @@
 const menubar = require('menubar')
 const mb = menubar()
-const {ipcMain} = require('electron')
+const { ipcMain } = require('electron')
 const Jira = require('./src/main/jiraWrapper')
 
 let jiraClient = null
@@ -13,7 +13,7 @@ mb.on('ready', () => {
   // IPC events
   ipcMain.on('jira-connect', (event, args) => {
     try {
-      jiraClient = new Jira(args).api
+      jiraClient = new Jira(args)
 
       // Return user info
       if (jiraClient) {

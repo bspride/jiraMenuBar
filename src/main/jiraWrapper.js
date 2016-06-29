@@ -12,7 +12,7 @@ class Jira {
 
   connect (opts) {
     this.api = new JiraApi({
-      host: opts.basePath,
+      host: opts.host,
       protocol: opts.protocol,
       basic_auth: {
         username: opts.userName,
@@ -33,5 +33,4 @@ class Jira {
     // this.api.searchJira(jql, null, callback)
   }
 }
-
 module.exports = Jira
