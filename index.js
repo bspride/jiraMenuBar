@@ -18,14 +18,13 @@ mb.on('ready', () => {
       // Return user info
       if (jiraClient) {
         jiraClient.getUserInfo(args, (err, data) => {
-          event.returnValue = err || data
+          event.returnValue = !err
         })
       } else {
-        event.returnValue = 'Something went wrong, failed connection.'
+        event.returnValue = false
       }
     } catch (e) {
-      console.error(e)
-      event.returnValue = 'Failed to connect to JIRA'
+      event.returnValue = false
     }
   })
 })

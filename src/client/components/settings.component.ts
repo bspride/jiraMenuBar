@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core"
 import { NgForm } from "@angular/common"
+import { Router } from "@angular/router"
 import { Settings } from '../models/settings'
 const electron = require('electron')
 const ipcRenderer = electron.ipcRenderer
@@ -11,6 +12,9 @@ const ipcRenderer = electron.ipcRenderer
 export class SettingsComponent {
   settings = new Settings("truapps/jira", "mclarke@trusimulation.com", "test", "test")
 
+  constructor (
+    private router: Router) {}
+
   ngOnInit() {
     this.getSettings()
   }
@@ -21,7 +25,11 @@ export class SettingsComponent {
 
   saveSettings() {
     //call to main to persist settings to disk
-    const data = ipcRenderer.sendSync('jira-connect', this.settings)
-    console.log(data)
+    const connect = ipcRenderer.sendSync('jira-connect', this.settings)
+    //if successful probably should show users a success message then
+    //navigate to issues screen
+    if (connect) {
+      this.router.navigate(['/issues'])
+    }
   }
 }
