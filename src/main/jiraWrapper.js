@@ -11,8 +11,8 @@ class Jira {
   }
 
   connect (opts) {
-    this.jira = new JiraApi({
-      host: opts.host,
+    this.api = new JiraApi({
+      host: opts.basePath,
       protocol: opts.protocol,
       basic_auth: {
         username: opts.userName,
@@ -23,14 +23,14 @@ class Jira {
 
   // Maybe move this to a seperate class?
   getUserInfo (info, cb) {
-    this.jira.myself.getMyself({}, cb)
+    this.api.myself.getMyself({}, cb)
   }
 
   getIssuesForCurrentUser (callback) {
     // let jql = {query: 'status="In Progress" AND assignee = curentuser()'}
 
     // TODO Updat since jira changed
-    // this.jira.searchJira(jql, null, callback)
+    // this.api.searchJira(jql, null, callback)
   }
 }
 

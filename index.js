@@ -3,7 +3,7 @@ const mb = menubar()
 const {ipcMain} = require('electron')
 const Jira = require('./src/main/jiraWrapper')
 
-let jira
+let jiraClient = null
 
 require('electron-debug')({showDevTools: true})
 
@@ -13,18 +13,19 @@ mb.on('ready', () => {
   // IPC events
   ipcMain.on('jira-connect', (event, args) => {
     try {
-      jira = new Jira(args)
+      jiraClient = new Jira(args).api
 
       // Return user info
-      if (jira) {
-        jira.getUserInfo(args, (err, data) => {
+      if (jiraClient) {
+        jiraClient.getUserInfo(args, (err, data) => {
           event.returnValue = err || data
         })
       } else {
         event.returnValue = 'Something went wrong, failed connection.'
       }
     } catch (e) {
-      event.returnValue = 'Failed to connect to Jira.'
+      console.error(e)
+      event.returnValue = 'Failed to connect to JIRA'
     }
   })
 })
