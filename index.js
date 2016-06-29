@@ -2,6 +2,9 @@ const menubar = require('menubar')
 const mb = menubar()
 const { ipcMain } = require('electron')
 const Jira = require('./src/main/jiraWrapper')
+// const keytar = require('keytar')
+
+// const SERVICE = 'JiraMenubar'
 
 let jiraClient = null
 
@@ -18,6 +21,9 @@ mb.on('ready', () => {
       // Return user info
       if (jiraClient) {
         jiraClient.getUserInfo(args, (err, data) => {
+          // if (!err) {
+          //   storeCredentials(args)
+          // }
           event.returnValue = !err
         })
       } else {
@@ -27,4 +33,24 @@ mb.on('ready', () => {
       event.returnValue = false
     }
   })
+
+  ipcMain.on('jira-issues', (event, args) => {
+    try {
+      jiraClient.getIssues(args, (err, data) => {
+        if (err) {
+          console.log(err)
+          event.returnValue = err
+        } else {
+          console.log(data)
+          event.returnValue = data
+        }
+      })
+    } catch (e) {
+      event.returnValue = e
+    }
+  })
 })
+
+// function storeCredentials (keys) {
+//   keytar.addPassword(SERVICE, keys.userName, keys.password)
+// }
