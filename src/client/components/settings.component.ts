@@ -9,15 +9,11 @@ const ipcRenderer = electron.ipcRenderer
   templateUrl: '../templates/settings.template.html'
 })
 export class SettingsComponent {
-  settings = new Settings("truapps/jira", "mclarke@trusimulation.com")
+  settings = new Settings("truapps/jira", "mclarke@trusimulation.com", "test", "test")
   data: string
 
   ngOnInit() {
     this.getSettings()
-
-    ipcRenderer.on('jira-connect-reply', (event, arg) => {
-      this.data = arg;
-    })
   }
 
   getSettings() {
@@ -26,7 +22,7 @@ export class SettingsComponent {
 
   saveSettings() {
     //call to main to persist settings to disk
-    ipcRenderer.send('jira-connect', {
+    return ipcRenderer.sendSync('jira-connect', {
       host: this.settings.basePath,
       user: '', // Add in user for testing
       password: this.settings.userName

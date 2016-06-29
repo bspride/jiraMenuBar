@@ -3,7 +3,7 @@
  *
  */
 
-const JiraApi = require('jira').JiraApi
+const JiraApi = require('jira-connector')
 
 class Jira {
   constructor (opts) {
@@ -11,13 +11,25 @@ class Jira {
   }
 
   connect (opts) {
-    this.jira = new JiraApi('http', opts.host, 80, opts.user, opts.password)
+    this.jira = new JiraApi({
+      host: opts.host,
+      basic_auth: {
+        username: opts.user,
+        password: opts.password
+      }
+    })
+  }
+
+  // Maybe move this to a seperate class?
+  getUserInfo (info, cb) {
+    this.jira.myself.getMyself({}, cb)
   }
 
   getIssuesForCurrentUser (callback) {
-    let jql = {query: 'status="In Progress" AND assignee = curentuser()'}
+    // let jql = {query: 'status="In Progress" AND assignee = curentuser()'}
 
-    this.jira.searchJira(jql, null, callback)
+    // TODO Updat since jira changed
+    // this.jira.searchJira(jql, null, callback)
   }
 }
 

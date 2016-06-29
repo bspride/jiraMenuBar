@@ -9,6 +9,14 @@
       <label for="userName">User Name</label>
       <input type="text" class="form-control" [(ngModel)]="settings.userName" name="userName" required />
     </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" [(ngModel)]="settings.password" name="password" required />
+    </div>
+    <div class="form-group">
+      <label for="jql">JQL</label>
+      <input type="text" class="form-control" [(ngModel)]="settings.jql" name="jql" />
+    </div>
     <button type="button" class="btn btn-default" (click)="saveSettings()">Connect</button>
   </form>
   <span>{{data}}</span>

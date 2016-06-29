@@ -15,20 +15,16 @@ mb.on('ready', () => {
     try {
       jira = new Jira(args)
 
-      // Return some success message for now
+      // Return user info
       if (jira) {
-        jira.getIssuesForCurrentUser((err, data) => {
-          if (err) {
-            event.sender.send('jira-connect-reply', err)
-          } else {
-            event.sender.send('jira-connect-reply', data)
-          }
+        jira.getUserInfo(args, (err, data) => {
+          event.returnValue = err || data
         })
       } else {
-        event.sender.send('jira-connect-reply', 'Something went wrong, failed connection.')
+        event.returnValue = 'Something went wrong, failed connection.'
       }
     } catch (e) {
-      event.sender.send('jira-connect-reply', 'Failed to connect to Jira.')
+      event.returnValue = 'Failed to connect to Jira.'
     }
   })
 })
