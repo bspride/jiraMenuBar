@@ -26,15 +26,15 @@ class Jira {
     this.api.myself.getMyself({}, cb)
   }
 
-  getIssues (userName, callback) {
-    let jql = {
-      jql: 'status="In Progress" AND assignee=' + userName,
+  getIssues (jql, callback) {
+    opts = {
+      jql: jql,
       startAt: 0,
       maxResults: 10
     }
 
     // TODO Updat since jira changed
-    this.api.search.search(jql, callback)
+    this.api.search.search(opts, callback)
   }
 }
 module.exports = Jira

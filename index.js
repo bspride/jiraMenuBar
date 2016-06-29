@@ -34,20 +34,12 @@ mb.on('ready', () => {
     }
   })
 
-  ipcMain.on('jira-issues', (event, args) => {
-    try {
-      jiraClient.getIssues(args, (err, data) => {
-        if (err) {
-          console.log(err)
-          event.returnValue = err
-        } else {
-          console.log(data)
-          event.returnValue = data
-        }
-      })
-    } catch (e) {
-      event.returnValue = e
-    }
+  ipcMain.on('getIssues', (event, args) => {
+    jiraClient.getIssues(args, (err, data) => {
+      if (!err) {
+        mb.window.webContents.send('issues', data)
+      }
+    })
   })
 })
 
