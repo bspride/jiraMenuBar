@@ -10,7 +10,6 @@ const ipcRenderer = electron.ipcRenderer
 })
 export class SettingsComponent {
   settings = new Settings("truapps/jira", "mclarke@trusimulation.com", "test", "test")
-  data: string
 
   ngOnInit() {
     this.getSettings()
@@ -22,10 +21,7 @@ export class SettingsComponent {
 
   saveSettings() {
     //call to main to persist settings to disk
-    return ipcRenderer.sendSync('jira-connect', {
-      host: this.settings.basePath,
-      user: '', // Add in user for testing
-      password: this.settings.userName
-    })
+    const data = ipcRenderer.sendSync('jira-connect', this.settings)
+    console.log(data)
   }
 }

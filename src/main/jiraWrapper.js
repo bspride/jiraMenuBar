@@ -13,6 +13,7 @@ class Jira {
   connect (opts) {
     this.jira = new JiraApi({
       host: opts.host,
+      protocol: 'http',
       basic_auth: {
         username: opts.user,
         password: opts.password
