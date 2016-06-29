@@ -27,7 +27,7 @@ class Jira {
   }
 
   getIssues (jql, callback) {
-    opts = {
+    var opts = {
       jql: jql,
       startAt: 0,
       maxResults: 10
