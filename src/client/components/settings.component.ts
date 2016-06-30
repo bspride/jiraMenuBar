@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from "@angular/core"
 import { NgForm } from "@angular/common"
 import { Router } from "@angular/router"
 import { Settings } from '../models/settings'
+import { AuthService } from '../services/auth.service'
+
 const electron = require('electron')
 const ipcRenderer = electron.ipcRenderer
 
@@ -13,7 +15,9 @@ export class SettingsComponent {
   settings = new Settings("truapps/jira", "mclarke@trusimulation.com", "test", "test")
 
   constructor (
-    private router: Router) {}
+    private router: Router,
+    private _authService: AuthService
+    ) {}
 
   ngOnInit() {
     this.getSettings()
@@ -24,8 +28,8 @@ export class SettingsComponent {
   }
 
   saveSettings() {
-    //call to main to persist settings to disk
-    const connect = ipcRenderer.sendSync('jira-connect', this.settings)
+    // Call to AuthService
+    let connect = this._authService.jiraConnect(this.settings)
     //if successful probably should show users a success message then
     //navigate to issues screen
     if (connect) {

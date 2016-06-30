@@ -8,7 +8,7 @@ export class JiraService {
 
   constructor() {
     this.issues = new Subject()
-    this.issues = this.issues.asObservable()
+    this.issues$ = this.issues.asObservable()
 
     this.onIssues()
   }
