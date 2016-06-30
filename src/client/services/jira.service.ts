@@ -23,7 +23,7 @@ export class JiraService {
   onIssues () {
     let self = this
     ipcRenderer.on('issues', (event, issues) => {
-      self.issues.next(issues)
+      self.issues$.next(issues)
     })
   }
 }
