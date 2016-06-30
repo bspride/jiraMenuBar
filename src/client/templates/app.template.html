@@ -1,2 +1,7 @@
-<h1>JIRA</h1>
+<h1 class="title">JIRA</h1>
+<div class="user-info" *ngIf="jiraUser !== null">
+  <span>{{jiraUser.displayName}}</span>
+  <img src="{{userAvatar}}" />
+</div>
+<div class="clean"></div>
 <router-outlet></router-outlet>

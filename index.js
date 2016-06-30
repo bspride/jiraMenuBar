@@ -17,7 +17,11 @@ mb.on('ready', () => {
       // Return user info
       if (jiraClient) {
         jiraClient.getUserInfo(args, (err, data) => {
-          event.returnValue = !err
+          if (err) {
+            event.returnValue = false
+          } else {
+            event.returnValue = data
+          }
         })
       } else {
         event.returnValue = false

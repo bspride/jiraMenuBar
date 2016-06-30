@@ -1,0 +1,11 @@
+.title {
+  float: left;
+}
+
+.user-info {
+  float: right;
+}
+
+.clean {
+  clear: both;
+}

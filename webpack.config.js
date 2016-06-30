@@ -25,6 +25,11 @@ const config = {
       test: /\.html$/,
       exclude: /node_modules/,
       loader: 'html-loader?attrs=false'
+    },
+    {
+      test: /\.css$/,
+      exclude: /node_modules/,
+      loader: 'raw'
     }
     ]    
   },
@@ -33,7 +38,7 @@ const config = {
     filename: 'bundle.js'
   },
   resolve: {
-    extensions: ['', '.ts', '.js', '.html'],
+    extensions: ['', '.ts', '.js', '.html', '.css'],
     modulesDirectories: ['src', 'node_modules']
   },
   target: 'electron'
