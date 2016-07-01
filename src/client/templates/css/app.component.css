@@ -1,11 +1,7 @@
-.title {
-  float: left;
+.navbar-header .user-info {
+  max-height: 50px;
 }
-
-.user-info {
-  float: right;
-}
-
-.clean {
-  clear: both;
+.navbar-header .user-info img {
+  max-height: 40px;
+  width: auto;
 }
