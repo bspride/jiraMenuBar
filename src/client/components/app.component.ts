@@ -19,7 +19,7 @@ export class JiraApp {
 
     self._authService.authUser$.subscribe((user) => {
       self.jiraUser = user
-      self.userAvatar = self.jiraUser.avatarUrls['32x32']
+      self.userAvatar = self.jiraUser.avatarUrls['16x16']
     })
   }
 }
