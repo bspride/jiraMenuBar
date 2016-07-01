@@ -37,6 +37,7 @@ const config = {
     path: PATHS.build,
     filename: 'bundle.js'
   },
+  devtool: 'source-map',
   resolve: {
     extensions: ['', '.ts', '.js', '.html', '.css'],
     modulesDirectories: ['src', 'node_modules']

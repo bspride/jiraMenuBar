@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core"
+import { Component, OnInit, NgZone } from "@angular/core"
 import { JiraService } from '../services/jira.service'
 
 @Component({
@@ -6,16 +6,21 @@ import { JiraService } from '../services/jira.service'
   templateUrl: '../templates/issues.template.html'
 })
 export class IssuesComponent {
-  issues: any
-  constructor(private _jiraService: JiraService) {
-    this.issues = []
-  }
+  issues = []
+
+  constructor (
+    private _jiraService: JiraService,
+    private _ngZone: NgZone
+  ) {}
 
   ngOnInit() {
     let self = this
-    this._jiraService.issues$.subscribe((issues) => {
-      self.issues = issues
+    self._jiraService.issues$.subscribe((data) => {
+      // Allows us to reenter angular zone
+      self._ngZone.run(() => {
+        self.issues = data
+      })
     })
-    this._jiraService.getIssues("")
+    self._jiraService.getIssues("")
   }
 }

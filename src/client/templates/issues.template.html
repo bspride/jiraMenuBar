@@ -1,1 +1,6 @@
 <h2>Issues</h2>
+<ul>
+  <li *ngFor="let issue of issues">
+    <span>{{issue.key}}</span><span>{{issue.fields.summary}}</span>
+  </li>
+</ul>
