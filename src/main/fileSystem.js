@@ -7,7 +7,22 @@ const CONFIG_FILE = 'jiraMenu.config'
 
 class FileSystem {
   constructor () {
-    this.appDataPath = `C:/Users/${this.getOsUser()}/AppData/Local/${FOLDER}`
+    let platform = this.getOs()
+
+    if (platform === 'win32' || platform === 'win64') {
+      this.appDataPath = `C:/Users/${this.getOsUser()}/AppData/Local/${FOLDER}`
+    } else {
+      // TODO Determine the correct path to store config file on unix-like os
+      this.appDataPath = `~/${this.getOsUser()}/Library/Preferences/${FOLDER}`
+    }
+  }
+
+  /**
+   * Determine the os that is being used
+   */
+  getOs () {
+    let platform = os.platform()
+    return platform
   }
 
   /**
