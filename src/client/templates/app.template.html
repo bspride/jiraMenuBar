@@ -1,15 +1,14 @@
 <nav class="navbar navbar-default navbar-static-top">
   <div class="container">
     <div class="navbar-header">
-      <div *ngIf="jiraUser !== null" class="user-info">
-        <span>{{jiraUser.displayName}}</span>
-        <img src="{{userAvatar}}" />
-      </div>
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
+      <div *ngIf="jiraUser !== null" class="user-info">
+        <span>{{jiraUser.displayName}} <img src="{{userAvatar}}" /> </span>
+      </div>
       <div class="navbar-brand">
         JIRA
       </div>

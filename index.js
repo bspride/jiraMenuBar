@@ -2,16 +2,11 @@ const menubar = require('menubar')
 const mb = menubar()
 const { ipcMain } = require('electron')
 const Jira = require('./src/main/jiraWrapper')
-const FileSystem = require('./src/main/fileSystem')
+// const FileSystem = require('./src/main/fileSystem')
 
 require('electron-debug')({showDevTools: true})
 
 let jiraClient = null
-let jiraMenuFiles = new FileSystem()
-
-jiraMenuFiles.setup((data) => {
-  console.log(data)
-})
 
 mb.on('ready', () => {
   console.log('app is ready')
