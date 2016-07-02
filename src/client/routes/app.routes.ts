@@ -6,8 +6,8 @@ import { IssueComponent } from '../components/issue.component'
 import { AuthGuard } from './authGuard'
 
 export const routes: RouterConfig = [
-  { path: '', component: SettingsComponent },
-  { path: 'issues', component: IssuesComponent, canActivate: [AuthGuard] },
+  { path: '', component: IssuesComponent, canActivate: [AuthGuard] },
+  { path: 'settings', component: SettingsComponent },
   { path: 'issue/:id', component: IssueComponent, canActivate: [AuthGuard] }
 ]
 

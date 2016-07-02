@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, NgZone } from '@angular/core'
 import { ROUTER_DIRECTIVES } from "@angular/router"
 import { AuthService } from '../services/auth.service'
 
@@ -8,18 +8,23 @@ import { AuthService } from '../services/auth.service'
   styles: [require('../templates/css/app.component.css')],
   directives: ROUTER_DIRECTIVES
 })
-export class JiraApp {
+export class JiraApp implements OnInit {
   jiraUser = null
-  userAvatar = null
 
-  constructor (private _authService: AuthService) {}
+  constructor (private _authService: AuthService, private _ngZone: NgZone) {}
 
   ngOnInit () {
     let self = this
+    console.log('init')
 
-    self._authService.authUser$.subscribe((user) => {
+    this._authService.authUser$.subscribe((user) => {
+      self._ngZone.run(() => {
+        self.jiraUser = user
+      })
+    })
+
+    this._authService.checkAuth$.subscribe((user) => {
       self.jiraUser = user
-      self.userAvatar = self.jiraUser.avatarUrls['16x16']
     })
   }
 }

@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
       </button>
       <div *ngIf="jiraUser !== null" class="user-info">
-        <span>{{jiraUser.displayName}} <img src="{{userAvatar}}" /> </span>
+        <span>{{jiraUser.displayName}} <img src="{{jiraUser.avatarUrl}}" /> </span>
       </div>
       <div class="navbar-brand">
         JIRA
@@ -15,8 +15,11 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse" style="height: 1px;">
       <ul class="nav navbar-nav navbar-right">
+        <li *ngIf="jiraUser !== null" class="user-info">
+          <a [routerLink]="['']">Issues</a>
+        </li>
         <li>
-          Settings
+          <a [routerLink]="['/settings']">Settings</a>
         </li>
       </ul>
     </div>

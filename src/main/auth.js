@@ -13,6 +13,7 @@ class Auth {
         storage.set('authSettings', {
           host: info.host,
           userName: info.userName,
+          displayName: res.displayName,
           avatarUrl: res.avatarUrls['16x16'],
           protocol: info.protocol
         })
@@ -31,9 +32,21 @@ class Auth {
       return cb({
         host: settings.host,
         userName: settings.userName,
+        displayName: settings.displayName,
         password: pass,
         protocol: settings.protocol,
         avatarUrl: settings.avatarUrl
+      })
+    })
+  }
+
+  static unAuth (cb) {
+    storage.get('authSettings', (err, settings) => {
+      if (err) return cb(false)
+      storage.remove('authSettings', (err) => {
+        if (err) return cb(false)
+        keytar.deletePassword('JiraMB', settings.userName)
+        cb(true)
       })
     })
   }

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { Injectable, NgZone } from '@angular/core'
 import { Subject } from 'rxjs/Subject'
 import { Settings } from '../models/settings'
 
@@ -9,35 +9,46 @@ const ipcRenderer = electron.ipcRenderer
 export class AuthService {
   private authUser
   private userInfo
+  private checkAuth
   authUser$
+  checkAuth$
   connectSettings
 
-  constructor () {
+  constructor (private zone: NgZone) {
     this.authUser = new Subject()
     this.authUser$ = this.authUser.asObservable()
+
+    this.checkAuth = new Subject()
+    this.checkAuth$ = this.checkAuth.asObservable()
   }
 
   jiraConnect (settings) {
+    let self = this
     // Set initial settings to write to disk
     this.connectSettings = settings
     // Get User Info from jira
     this.userInfo = ipcRenderer.sendSync('jira-connect', settings)
-    console.log(this.userInfo)
-
+    console.log('in auth check')
     if (this.userInfo) {
       // Send the user info to all subscribers
       this.authUser.next(this.userInfo)
-      // Return a successful connection
-      return true
     } else {
       // Send failed request to subscribers
       this.authUser.next(this.userInfo)
-      // Return failed connection
-      return false;
     }
   }
 
   isLoggedIn () {
-    return ipcRenderer.sendSync('isAuthed')
+    this.userInfo = ipcRenderer.sendSync('isAuthed')
+    this.checkAuth.next(this.userInfo)
+    return this.userInfo
+  }
+
+  disconnect () {
+    return ipcRenderer.sendSync('unAuth')
+  }
+
+  getUserSettings () {
+    return this.userInfo
   }
 }

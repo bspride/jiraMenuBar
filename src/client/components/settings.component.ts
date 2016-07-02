@@ -12,7 +12,7 @@ const ipcRenderer = electron.ipcRenderer
   templateUrl: '../templates/settings.template.html'
 })
 export class SettingsComponent {
-  settings = new Settings("jiramenubar.atlassian.net", "bspride11@gmail.com", "test", "test", "https", "test")
+  settings: Settings
 
   constructor (
     private router: Router,
@@ -24,7 +24,7 @@ export class SettingsComponent {
   }
 
   getSettings() {
-    //call to main to get settings from disk
+    this.settings = this._authService.getUserSettings() || new Settings()
   }
 
   saveSettings() {
@@ -33,7 +33,11 @@ export class SettingsComponent {
     //if successful probably should show users a success message then
     //navigate to issues screen
     if (connect) {
-      this.router.navigate(['/issues'])
+      this.router.navigate([''])
     }
+  }
+
+  disconnect() {
+    let data = this._authService.disconnect()
   }
 }
