@@ -25,7 +25,7 @@ export class IssuesComponent {
   }
 
   onSelect(issue: any) {
-    let link = ['issue', {key: issue.key}]
+    let link = ['/issue', issue.key]
     this._router.navigate(link)
   }
 }
