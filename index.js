@@ -2,8 +2,7 @@ const menubar = require('menubar')
 const mb = menubar()
 const { ipcMain } = require('electron')
 const Jira = require('./src/main/jiraWrapper')
-const storage = require('electron-json-storage')
-const keytar = require('keytar')
+const Auth = require('./src/main/auth')
 
 require('electron-debug')({showDevTools: true})
 
@@ -15,24 +14,9 @@ mb.on('ready', () => {
   ipcMain.on('jira-connect', (event, args) => {
     try {
       jiraClient = new Jira(args)
-
-      // Return user info
       if (jiraClient) {
-        jiraClient.getUserInfo(args, (err, data) => {
-          if (err) {
-            event.returnValue = false
-          } else {
-            // Persist to disk
-            storage.set('authSettings', {
-              host: args.host,
-              userName: args.userName,
-              avatar: data.avatarUrls['16x16']
-            })
-            // Save credentials in keychain
-            keytar.addPassword('JiraMB', args.userName, args.password)
-            // Return to caller
-            event.returnValue = data
-          }
+        Auth.auth(jiraClient, args, (data) => {
+          event.returnValue = data
         })
       } else {
         event.returnValue = false
@@ -47,6 +31,13 @@ mb.on('ready', () => {
       if (!err) {
         event.sender.send('issues', data)
       }
+    })
+  })
+
+  ipcMain.on('isAuthed', (event) => {
+    Auth.getAuth((success) => {
+      if (!jiraClient && success) jiraClient = new Jira(success)
+      event.returnValue = success
     })
   })
 })

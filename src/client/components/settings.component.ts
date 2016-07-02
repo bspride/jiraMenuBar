@@ -12,7 +12,7 @@ const ipcRenderer = electron.ipcRenderer
   templateUrl: '../templates/settings.template.html'
 })
 export class SettingsComponent {
-  settings = new Settings("truapps/jira", "mclarke@trusimulation.com", "test", "test")
+  settings = new Settings("jiramenubar.atlassian.net", "bspride11@gmail.com", "test", "test", "https", "test")
 
   constructor (
     private router: Router,

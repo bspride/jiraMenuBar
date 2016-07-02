@@ -4,6 +4,7 @@ export class Settings {
     public userName: string,
     public password: string,
     public jql: string,
-    public protocol: string = 'https'
+    public protocol: string = 'https',
+    public avatarUrl: string
   ){}
 }

@@ -21,7 +21,6 @@ class Jira {
     })
   }
 
-  // Maybe move this to a seperate class?
   getUserInfo (info, cb) {
     this.api.myself.getMyself({}, cb)
   }
@@ -33,7 +32,6 @@ class Jira {
       maxResults: 10
     }
 
-    // TODO Updat since jira changed
     this.api.search.search(opts, callback)
   }
 }

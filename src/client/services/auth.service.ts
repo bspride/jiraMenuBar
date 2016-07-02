@@ -22,6 +22,7 @@ export class AuthService {
     this.connectSettings = settings
     // Get User Info from jira
     this.userInfo = ipcRenderer.sendSync('jira-connect', settings)
+    console.log(this.userInfo)
 
     if (this.userInfo) {
       // Send the user info to all subscribers
@@ -34,5 +35,9 @@ export class AuthService {
       // Return failed connection
       return false;
     }
+  }
+
+  isLoggedIn () {
+    return ipcRenderer.sendSync('isAuthed')
   }
 }

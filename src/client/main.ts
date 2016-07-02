@@ -7,6 +7,7 @@ import { disableDeprecatedForms, provideForms } from '@angular/forms'
 import { AuthService } from './services/auth.service'
 import { JiraService } from './services/jira.service'
 import { JiraApp } from './components/app.component'
+import { AuthGuard } from './routes/authGuard'
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -16,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     APP_ROUTER_PROVIDERS,
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     AuthService,
-    JiraService
+    JiraService,
+    AuthGuard
   ])
 })
