@@ -3,7 +3,8 @@ import { JiraService } from '../services/jira.service'
 
 @Component({
   selector: 'issues',
-  templateUrl: '../templates/issues.template.html'
+  templateUrl: '../templates/issues.template.html',
+  styles: [require('../templates/css/issues.component.css')]
 })
 export class IssuesComponent {
   issues = []
