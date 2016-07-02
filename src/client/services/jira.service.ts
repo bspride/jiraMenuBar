@@ -1,13 +1,15 @@
 import { Subject } from 'rxjs/Subject'
+import { Injectable, NgZone } from '@angular/core'
 
 const electron = require('electron')
 const ipcRenderer = electron.ipcRenderer
 
+@Injectable()
 export class JiraService {
   issues
   issues$
 
-  constructor () {
+  constructor (private zone: NgZone) {
     this.issues = new Subject()
     this.issues$ = this.issues.asObservable()
 
@@ -17,14 +19,16 @@ export class JiraService {
   //Setting up issues async so we can eventually run
   //on a configurable schedule
   getIssues (jql) {
-    jql = 'assignee={user} AND status=open'
+    jql = 'assignee=currentUser()'
     ipcRenderer.send('getIssues', jql)
   }
 
   onIssues () {
     let self = this
     ipcRenderer.on('issues', (event, data) => {
-      self.issues.next(data.issues)
+      self.zone.run(() => {
+        self.issues.next(data.issues)
+      })
     })
   }
 }
