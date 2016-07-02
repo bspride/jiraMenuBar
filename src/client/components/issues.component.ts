@@ -1,4 +1,5 @@
 import { Component, OnInit} from "@angular/core"
+import { Router } from "@angular/router"
 import { JiraService } from '../services/jira.service'
 
 @Component({
@@ -10,7 +11,8 @@ export class IssuesComponent {
   issues = []
 
   constructor (
-    private _jiraService: JiraService
+    private _jiraService: JiraService,
+    private _router: Router
   ) {}
 
   ngOnInit() {
@@ -20,5 +22,10 @@ export class IssuesComponent {
       self.issues = data
     })
     self._jiraService.getIssues("")
+  }
+
+  onSelect(issue: any) {
+    let link = ['issue', {key: issue.key}]
+    this._router.navigate(link)
   }
 }

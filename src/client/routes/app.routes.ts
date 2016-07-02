@@ -8,7 +8,7 @@ import { AuthGuard } from './authGuard'
 export const routes: RouterConfig = [
   { path: '', component: IssuesComponent, canActivate: [AuthGuard] },
   { path: 'settings', component: SettingsComponent },
-  { path: 'issue/:id', component: IssueComponent, canActivate: [AuthGuard] }
+  { path: 'issue/:key', component: IssueComponent, canActivate: [AuthGuard] }
 ]
 
 export const APP_ROUTER_PROVIDERS = [
