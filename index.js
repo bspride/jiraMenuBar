@@ -2,7 +2,8 @@ const menubar = require('menubar')
 const mb = menubar()
 const { ipcMain } = require('electron')
 const Jira = require('./src/main/jiraWrapper')
-// const FileSystem = require('./src/main/fileSystem')
+const storage = require('electron-json-storage')
+const keytar = require('keytar')
 
 require('electron-debug')({showDevTools: true})
 
@@ -21,6 +22,15 @@ mb.on('ready', () => {
           if (err) {
             event.returnValue = false
           } else {
+            // Persist to disk
+            storage.set('authSettings', {
+              host: args.host,
+              userName: args.userName,
+              avatar: data.avatarUrls['16x16']
+            })
+            // Save credentials in keychain
+            keytar.addPassword('JiraMB', args.userName, args.password)
+            // Return to caller
             event.returnValue = data
           }
         })
