@@ -25,14 +25,20 @@ class Jira {
     this.api.myself.getMyself({}, cb)
   }
 
-  getIssues (jql, callback) {
+  getIssues (jql, cb) {
     var opts = {
       jql: jql,
       startAt: 0,
       maxResults: 10
     }
 
-    this.api.search.search(opts, callback)
+    this.api.search.search(opts, cb)
+  }
+
+  getIssue (key, cb) {
+    this.api.issue.getIssue({
+      issueKey: key
+    }, cb)
   }
 }
 module.exports = Jira

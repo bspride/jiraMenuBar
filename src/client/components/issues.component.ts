@@ -18,7 +18,6 @@ export class IssuesComponent {
   ngOnInit() {
     let self = this
     self._jiraService.issues$.subscribe((data) => {
-      console.log(data)
       self.issues = data
     })
     self._jiraService.getIssues("")
