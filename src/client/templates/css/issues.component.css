@@ -1,3 +1,10 @@
 td.issue-priority img {
   height: 20px;
 }
+
+.no-issues {
+  text-align: center;
+  margin-top: 100px;
+  font-size: 1.2em;
+  color: #112251;
+}

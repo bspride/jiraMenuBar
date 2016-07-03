@@ -1,5 +1,5 @@
 import { Component, OnInit, NgZone } from '@angular/core'
-import { ROUTER_DIRECTIVES } from "@angular/router"
+import { ROUTER_DIRECTIVES, Router, NavigationEnd } from "@angular/router"
 import { AuthService } from '../services/auth.service'
 
 @Component({
@@ -11,7 +11,16 @@ import { AuthService } from '../services/auth.service'
 export class JiraApp implements OnInit {
   jiraUser = null
 
-  constructor (private _authService: AuthService, private _ngZone: NgZone) {}
+  constructor (
+    private _authService: AuthService, 
+    private _ngZone: NgZone,
+    private _router: Router) {
+      this._router.events.subscribe((event) => {
+        if (event instanceof NavigationEnd) {
+          console.log(event)
+        }
+      })
+    }
 
   ngOnInit () {
     let self = this
