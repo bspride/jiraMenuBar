@@ -1,1 +1,9 @@
-<h1> Issue page reached </h1>
+<div *ngIf="issue">
+  <img src="{{issue.fields.issuetype?.iconUrl}}" />
+  <h2>{{issue.fields.summary}}</h2>
+  <p> Status: <img src="{{issue.fields.status.iconUrl}}" />
+  Assignee: {{issue.fields.assignee.displayName}}
+  Priority: {{issue.fields.priority.name}}
+  Resolution: {{issue.fields.resolution}}
+  Description:</p> <div [innerHTML]="description"></div>
+</div>

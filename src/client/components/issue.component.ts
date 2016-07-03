@@ -1,15 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { JiraService } from '../services/jira.service'
+var j2m = require('jira2md')
 
 @Component({
   selector: 'issue',
   templateUrl: '../templates/issue.template'
 })
 export class IssueComponent {
-
-  private issue: any
-  private sub: any
+  issue: any
+  description: any
+  private issueSub: any
+  private routeSub: any
 
   constructor(
     private _route: ActivatedRoute,
@@ -19,17 +21,13 @@ export class IssueComponent {
 
   ngOnInit() {
     let self = this
+    let key = this._route.snapshot.params['key']
+    console.log(key)
     self._jiraService.issue$.subscribe((data) => {
       self.issue = data
-      console.log(self.issue)
+      self.description = j2m.jira_to_html(self.issue.fields.description)
+      console.log(self.description)
     })
-    this.sub = this._route.params.subscribe(params => {
-      let key = params['key']
-      self._jiraService.getIssue(key)
-    })
-  }
-
-  ngOnDestroy() {
-    this.sub.unsubscribe()
+    self._jiraService.getIssue(key)
   }
 }
