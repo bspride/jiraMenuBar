@@ -1,9 +1,16 @@
 <div *ngIf="issue">
-  <img src="{{issue.fields.issuetype?.iconUrl}}" />
   <h2>{{issue.fields.summary}}</h2>
-  <p> Status: <img src="{{issue.fields.status.iconUrl}}" />
-  Assignee: {{issue.fields.assignee.displayName}}
-  Priority: {{issue.fields.priority.name}}
-  Resolution: {{issue.fields.resolution}}
-  Description:</p> <div [innerHTML]="description"></div>
+  <div class="col-xs-6">
+    <span>Type: <img src="{{issue.fields.issuetype?.iconUrl}}" /></span><br />
+    <span>Priority: {{issue.fields.priority.name}}</span>
+  </div>
+  <div class="col-xs-6">
+    <span>Assignee: {{issue.fields.assignee.displayName}}</span><br />
+    <span>Status: <img src="{{issue.fields.status.iconUrl}}" /></span>
+    <span>Resolution: {{issue.fields.resolution}}</span>
+  </div>
+  <div class="col-xs-12">
+    <h4>Description</h4>
+    <div [innerHTML]="description"></div>
+  </div>
 </div>
