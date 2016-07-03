@@ -45,6 +45,8 @@ export class JiraService {
     let self = this
     ipcRenderer.on('issue', (event, data) => {
       self.zone.run(() => {
+        console.log(data)
+        console.log('NEXT')
         self.issue.next(data)
       })
     })

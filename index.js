@@ -37,7 +37,6 @@ mb.on('ready', () => {
   ipcMain.on('getIssue', (event, args) => {
     jiraClient.getIssue(args, (err, data) => {
       if (!err) {
-        console.log('sending issue')
         event.sender.send('issue', data)
       }
     })
