@@ -1,26 +1,36 @@
-<table class="table table-hover issue-table">
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Key</th>
-      <th>Summary</th>
-      <th>Priority</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let issue of issues" (click)="onSelect(issue)">
-      <td class="issue-type">
-        <img src="{{issue.fields.issuetype.iconUrl}}" data-toggle="tooltip" data-placement="left" title="{{issue.fields.issuetype.name}}"/>
-      </td>
-      <td class="issue-key">
-        {{issue.key}}
-      </td>
-      <td class="issue-summary">
-        {{issue.fields.summary}}
-      </td>
-      <td class="issue-priority">
-        <img src="{{issue.fields.priority.iconUrl}}" data-toggle="tooltip" data-placement="left" title="{{issue.fields.priority.name}}"/>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div [ngSwitch]="loading">
+  <div *ngSwitchCase="true">
+    <loading-indicator></loading-indicator>
+  </div>
+  <div *ngSwitchCase="false">
+    <table *ngIf="issues.length" class="table table-hover issue-table">
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Key</th>
+          <th>Summary</th>
+          <th>Priority</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let issue of issues" (click)="onSelect(issue)">
+          <td class="issue-type">
+            <img src="{{issue.fields.issuetype.iconUrl}}" data-toggle="tooltip" data-placement="left" title="{{issue.fields.issuetype.name}}"/>
+          </td>
+          <td class="issue-key">
+            {{issue.key}}
+          </td>
+          <td class="issue-summary">
+            {{issue.fields.summary}}
+          </td>
+          <td class="issue-priority">
+            <img src="{{issue.fields.priority.iconUrl}}" data-toggle="tooltip" data-placement="left" title="{{issue.fields.priority.name}}"/>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="!issues.length">
+      No Issues
+    </div>
+  </div>
+</div>
