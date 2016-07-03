@@ -29,8 +29,9 @@
         </tr>
       </tbody>
     </table>
-    <div *ngIf="!issues.length">
-      No Issues
+    <div *ngIf="!issues.length" class="no-issues">
+      <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+      <div>You currently have no issues!</div>
     </div>
   </div>
 </div>
