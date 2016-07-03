@@ -12,5 +12,8 @@
   <div class="col-xs-12">
     <h4>Description</h4>
     <div [innerHTML]="description"></div>
+    <my-comment *ngFor="let comment of comments"
+          [name]="comment">
+    </my-comment>
   </div>
 </div>

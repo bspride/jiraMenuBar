@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { JiraService } from '../services/jira.service'
-var j2m = require('jira2md')
+import { CommentComponent } from './comment.component'
+
+const j2m = require('jira2md')
 
 @Component({
   selector: 'issue',
-  templateUrl: '../templates/issue.template'
+  templateUrl: '../templates/issue.template',
+  directives: [CommentComponent]
 })
 export class IssueComponent {
   issue: any
   description: any
+  comments = ['Robert', 'Clarke', 'Courtney']
   private issueSub: any
   private routeSub: any
 
