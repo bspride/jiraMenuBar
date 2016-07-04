@@ -1,6 +1,13 @@
-<div class="col-xs-12 comment-border">
-  <span>{{author.displayName}} added a comment - {{timeLog.toLocaleString()}}</span>
-  <p>
-    {{commentObj.body}}
-  </p>
-</div>
+<table class="table table-striped">
+  <tbody>
+    <tr *ngFor="let comment of commentObj">
+      <td>
+        <span>{{comment.author.displayName}} added a comment - time</span>
+        <p>
+          {{comment.body}}
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<button type="button" class="btn btn-primary">Comment</button>
