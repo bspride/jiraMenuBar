@@ -10,15 +10,20 @@ export class JiraService {
   issues$
   issue
   issue$
+  comment
+  comment$
 
   constructor (private zone: NgZone) {
     this.issues = new Subject()
     this.issues$ = this.issues.asObservable()
     this.issue = new Subject()
     this.issue$ = this.issue.asObservable()
+    this.comment = new Subject()
+    this.comment$ = this.comment.asObservable()
 
     this.onIssues()
     this.onIssue()
+    this.onComment()
   }
 
   //Setting up issues async so we can eventually run
@@ -48,6 +53,21 @@ export class JiraService {
         console.log(data)
         console.log('NEXT')
         self.issue.next(data)
+      })
+    })
+  }
+
+  getComments (key) {
+    ipcRenderer.send('getComments', key)
+  }
+
+  onComment () {
+    let self = this
+    ipcRenderer.on('comments', (event, data) => {
+      self.zone.run(() => {
+        console.log(data)
+        console.log('NEXT')
+        self.comment.next(data)
       })
     })
   }

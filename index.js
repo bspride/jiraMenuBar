@@ -42,6 +42,14 @@ mb.on('ready', () => {
     })
   })
 
+  ipcMain.on('getComments', (event, args) => {
+    jiraClient.getComments(args, (err, data) => {
+      if (!err) {
+        event.sender.send('comments', data)
+      }
+    })
+  })
+
   ipcMain.on('isAuthed', (event) => {
     Auth.getAuth((success) => {
       if (!jiraClient && success) jiraClient = new Jira(success)

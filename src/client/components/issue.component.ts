@@ -13,7 +13,7 @@ const j2m = require('jira2md')
 export class IssueComponent {
   issue: any
   description: any
-  comments = ['Robert', 'Clarke', 'Courtney']
+  comments: any
   private issueSub: any
   private routeSub: any
 
@@ -21,17 +21,31 @@ export class IssueComponent {
     private _route: ActivatedRoute,
     private _jiraService: JiraService) {
       console.log(this._route.params)
+      this.comments = null
     }
 
   ngOnInit() {
     let self = this
     let key = this._route.snapshot.params['key']
     console.log(key)
+    
+    self.subscribe()
+
+    self._jiraService.getIssue(key)
+    self._jiraService.getComments(key)
+  }
+
+  subscribe () {
+    let self = this
+    // Issue subscription
     self._jiraService.issue$.subscribe((data) => {
       self.issue = data
       self.description = j2m.jira_to_html(self.issue.fields.description)
       console.log(self.description)
     })
-    self._jiraService.getIssue(key)
+    // Comments subscription
+    self._jiraService.comment$.subscribe((data) => {
+      self.comments = data.comments
+    })
   }
 }

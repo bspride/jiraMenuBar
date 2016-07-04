@@ -40,5 +40,11 @@ class Jira {
       issueKey: key
     }, cb)
   }
+
+  getComments (key, cb) {
+    this.api.issue.getComments({
+      issueKey: key
+    }, cb)
+  }
 }
 module.exports = Jira
