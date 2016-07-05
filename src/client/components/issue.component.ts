@@ -48,4 +48,11 @@ export class IssueComponent {
       self.comments = data.comments
     })
   }
+
+  onRefresh () {
+    let self = this
+    let key = this._route.snapshot.params['key']
+
+    self._jiraService.getComments(key)
+  }
 }

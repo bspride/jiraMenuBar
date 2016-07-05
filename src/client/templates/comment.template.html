@@ -10,4 +10,10 @@
     </tr>
   </tbody>
 </table>
-<button type="button" class="btn btn-primary">Comment</button>
+<div class="col-xs-12">
+  <textarea *ngIf="showCommentBox" class="form-control" rows="4" [(ngModel)]="commentData"></textarea><br />
+  <span>
+    <button type="button" class="btn btn-primary" (click)="newComment()">{{commentBtnValue}}</button>
+    <button type="button" class="btn btn-link" *ngIf="commentBtnValue === 'Add'" (click)="cancelComment()">Cancel</button>
+  </span>  
+</div>

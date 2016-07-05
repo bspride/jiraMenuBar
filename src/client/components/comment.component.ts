@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+
+
 @Component({
   selector: 'my-comments',
   templateUrl: '../templates/comment.template',
@@ -7,7 +9,38 @@ import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 export class CommentComponent {
   @Input() commentObj: any
 
+  showCommentBox: boolean
+  commentBtnValue: string
+  commentData: string
+
   ngOnInit () {
-    // TODO Set any class variables
+    let self = this
+    self.showCommentBox = false
+    self.commentData = null
+    self.commentBtnValue = 'Comment'
+  }
+
+  newComment () {
+    let self = this
+
+    if (!self.showCommentBox) {
+      self.showCommentBox = true
+      if (self.commentBtnValue === 'Comment') {
+        self.commentBtnValue = 'Add'
+      } else {
+        self.addComment()
+      }
+    } 
+  }
+
+  addComment () {
+    // TODO Add comment logic
+  }
+
+  cancelComment () {
+    let self = this
+    self.showCommentBox = false
+    self.commentBtnValue = 'Comment'
+    self.commentData = null
   }
 }
