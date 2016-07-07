@@ -46,5 +46,12 @@ class Jira {
       issueKey: key
     }, cb)
   }
+
+  addComment (args, cb) {
+    this.api.issue.addComment({
+      issueKey: args.key,
+      comment: args.comment
+    }, cb)
+  }
 }
 module.exports = Jira

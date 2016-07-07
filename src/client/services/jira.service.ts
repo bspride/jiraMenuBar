@@ -71,4 +71,13 @@ export class JiraService {
       })
     })
   }
+
+  addComment (issueKey, comment) {
+    let data = ipcRenderer.sendSync('addComment', {
+      key: issueKey,
+      comment
+    })
+
+    return data
+  }
 }

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
-
+import { ActivatedRoute } from '@angular/router'
+import { JiraService } from '../services/jira.service'
 
 @Component({
   selector: 'my-comments',
@@ -8,10 +9,15 @@ import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 })
 export class CommentComponent {
   @Input() commentObj: any
+  @Output() refreshComments = new EventEmitter<boolean>()
 
   showCommentBox: boolean
   commentBtnValue: string
   commentData: string
+
+  constructor (
+    private _route: ActivatedRoute,
+    private _jiraService: JiraService) {}
 
   ngOnInit () {
     let self = this
@@ -25,16 +31,27 @@ export class CommentComponent {
 
     if (!self.showCommentBox) {
       self.showCommentBox = true
-      if (self.commentBtnValue === 'Comment') {
-        self.commentBtnValue = 'Add'
-      } else {
-        self.addComment()
-      }
-    } 
+    }
+
+    if (self.commentBtnValue === 'Comment') {
+      self.commentBtnValue = 'Add'
+    } else {
+      self.addComment()
+    }
   }
 
   addComment () {
-    // TODO Add comment logic
+    let self = this
+    let key = this._route.snapshot.params['key']
+    let isSuccess = false
+
+    if (self.commentData !== null) {
+      isSuccess = self._jiraService.addComment(key, self.commentData) 
+      self.refreshComments.emit(isSuccess)
+      self.showCommentBox = false
+      self.commentData = null
+      self.commentBtnValue = 'Comment'
+    }
   }
 
   cancelComment () {

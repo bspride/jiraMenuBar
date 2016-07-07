@@ -18,7 +18,9 @@
   <div class="col-xs-12">
     <h4>Comments</h4>
     <div *ngIf="comments != null">
-      <my-comments [commentObj]="comments"></my-comments>
+      <my-comments 
+        [commentObj]="comments"
+        (refreshComments)="onRefresh($event)"></my-comments>
     </div>
   </div>
 </div>

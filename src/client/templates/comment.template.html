@@ -2,7 +2,7 @@
   <tbody>
     <tr *ngFor="let comment of commentObj">
       <td>
-        <span>{{comment.author.displayName}} added a comment - time</span>
+        <span>{{comment.author.displayName}} added a comment - {{comment.created | date: 'short'}}</span>
         <p>
           {{comment.body}}
         </p>

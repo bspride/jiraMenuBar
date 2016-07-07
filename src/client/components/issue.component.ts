@@ -49,10 +49,12 @@ export class IssueComponent {
     })
   }
 
-  onRefresh () {
+  onRefresh (refresh: boolean) {
     let self = this
     let key = this._route.snapshot.params['key']
 
-    self._jiraService.getComments(key)
+    if (refresh) {
+      self._jiraService.getComments(key)
+    }
   }
 }
