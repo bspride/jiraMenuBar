@@ -13,7 +13,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let issue of issues" (click)="onSelect(issue)">
+        <tr class="issue-row" *ngFor="let issue of issues" (click)="onSelect(issue)">
           <td class="issue-type">
             <img src="{{issue.fields.issuetype.iconUrl}}" data-toggle="tooltip" data-placement="left" title="{{issue.fields.issuetype.name}}"/>
           </td>

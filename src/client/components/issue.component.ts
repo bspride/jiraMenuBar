@@ -40,7 +40,11 @@ export class IssueComponent {
     // Issue subscription
     self._jiraService.issue$.subscribe((data) => {
       self.issue = data
-      self.description = j2m.jira_to_html(self.issue.fields.description)
+      if (self.issue.fields.description) {
+        self.description = j2m.jira_to_html(self.issue.fields.description)
+      } else {
+        self.description = 'No description'
+      }
       console.log(self.description)
     })
     // Comments subscription
