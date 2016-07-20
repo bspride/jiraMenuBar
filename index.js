@@ -6,10 +6,29 @@ const Auth = require('./src/main/auth')
 
 require('electron-debug')({showDevTools: true})
 
+// Time
+const minutes = 5
+const refreshTime = minutes * 60000
+
 let jiraClient = null
 
+function refreshIssues (issueArgs) {
+  if (jiraClient) {
+    jiraClient.getIssues(issueArgs, (err, data) => {
+      if (!err) {
+        // Send Update to renderer view
+        mb.window.webContents.send('issues', data)
+      }
+    })
+  }
+}
+
 mb.on('ready', () => {
+  // let timeout = null
+  // let authArgs = null
+
   console.log('app is ready')
+
   // IPC events
   ipcMain.on('jira-connect', (event, args) => {
     try {
@@ -30,6 +49,8 @@ mb.on('ready', () => {
     jiraClient.getIssues(args, (err, data) => {
       if (!err) {
         event.sender.send('issues', data)
+        // Create timer to refresh data
+        setInterval(refreshIssues, refreshTime, args)
       }
     })
   })
